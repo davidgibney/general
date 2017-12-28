@@ -1,0 +1,98 @@
+## Behold the power of Regex.
+
+
+# Anchors
+
+^       Start of line
+\A      Start of string
+$       End of line
+\Z      End of string
+\b      Word boundary
+\B      Not word boundary
+\<      Start of word
+\>      End of word
+
+
+
+# Character classes
+
+\c      Control character
+\s      White space
+\S      Not white space
+\d      Digit
+\D      Not digit
+\w      Word
+\W      Not word
+\xhh    Hexadecimal character hh
+\Oxxx   Octal character xxx
+
+
+
+# Example patterns
+
+^-?[0-9]+([0-9]+)?$                         All integers
+([A-Za-z0-9-]+)                             Letters, numbers and hyphens
+(\d{1,2}\/\d{1,2}\/\d{4})                   Date (e.g. 21/3/2006)
+([^\s]+(?=\.(jpg|gif|png))\.\2)             jpg, gif or png image
+(^[1-9]{1}$|^[1-4]{1}[0-9]{1}$|^50$)        Any number from 1 to 50 inclusive
+(#?([A-Fa-f0-9]){3}(([A-Fa-f0-9]){3})?)     Valid hexadecimal colour code
+((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15})     8 to 15 character string with at least one upper case letter, one lower case letter, and one digit (useful for passwords).
+(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})            Email addresses
+(\<(/?[^\>]+)\>)                            HTML Tags
+
+
+
+# Special characters
+
+\           Escape character
+\n          Newline
+\r          Carriage return
+\t          Tab
+
+
+
+# Quantifiers
+
+*           0 or more
+*?          0 or more, ungreedy
++           1 or more
++?          1 or more, ungreedy
+?           0 or 1
+??          0 or 1, ungreedy
+{3}         Exactly 3
+{3,}        3 or more
+{3,5}       3, 4 or 5
+3, 4 or 5, ungreedy
+
+
+
+# Ranges
+
+.           Any character except new line (\n)
+(a|b)       a or b
+(...)       Group
+(?:...)     Passive Group
+[abc]       Range (a or b or c)
+[^abc]      Not a or b or c
+[a-q]       Letter between a and q
+[A-Q]       Upper case letter between A and Q
+[0-7]       Digit between 0 and 7
+\n          nth group/subpattern
+
+
+
+# POSIX
+
+[:upper:]
+[:lower:]
+[:alpha:]
+[:alnum:]
+[:digit:]
+[:xdigit:]
+[:punct:]
+[:blank:]
+[:space:]
+[:cntrl:]
+[:graph:]
+[:print:]
+[:word:]
