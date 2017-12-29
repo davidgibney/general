@@ -45,6 +45,6 @@ add other user accounts, such as one per client.  If the MacBook is Charle's, th
 * Text and code editors:  Sublime, Atom, Visual Studio Code, Brackets, TextWrangler, ...
 * Fix your link to Python (don't use OSX system Python) -- [good blog post](http://blog.manbolo.com/2014/09/27/use-python-effectively-on-os-x)
 	* And more than that, be sure to follow the practice of using virtual environments.
-* Customize your terminal:  [zsh plus plugins](https://gist.github.com/kevin-smets/8568070)
+* Customize your terminal:  [oh-my-zsh-plus-plugins](https://gist.github.com/kevin-smets/8568070). [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). And I like [this .zshrc profile](https://github.com/davidgibney/general/blob/dev/config/.zshrc)
 * Slack, Evernote, Virtualbox, Cyberduck
 
