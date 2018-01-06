@@ -37,8 +37,8 @@ wget https://gallery.technet.microsoft.com/ODBC-Driver-13-for-SQL-8d067754/file/
 sh install.sh
  
 # virtual env
-mkdir /data
-cd /data
+mkdir /venvs
+cd /venvs
 pip3.6 install virtualenv
 python3.6 -m venv my_project
 cd my_project
@@ -48,8 +48,8 @@ source bin/activate
 pip3 install pymssql
  
 # had to copy over some system drivers
-cp /opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.9.1 /data/my_project
-cp /usr/lib64/libsybdb.so.5 .
+cp /opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.9.1 /venvs/my_project/
+cp /usr/lib64/libsybdb.so.5 /venvs/my_project/
  
  
 ### had to build shared libraries from source!
