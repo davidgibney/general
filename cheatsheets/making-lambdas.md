@@ -85,16 +85,7 @@ To get your zip file you can scp it down from your workstation, or, if you have 
 
 
 
-Because this lambda function aims to access a resource (ec2 instance) in the private VPC, you just need to make sure that the role(s) attached to the lambda function allow that permission.  Also, you must ensure that the correct subnets and security groups are attached to the lambda.  A suggestion for testing and troubleshooting connection issues between your lambda and ec2 instance is to have a function in your lambda that pings the server, .e.g....
-
-``` python
-def host_is_up(server):
-    response = os.system("ping -c 1 " + server)
-    if response == 0: 
-        return true
-    else:
-        return false
-```
+Because this lambda function aims to access a resource (ec2 instance) in the private VPC, you just need to make sure that the role(s) attached to the lambda function allow that permission.  Also, you must ensure that the correct subnets and security groups are attached to the lambda.
 
 
 
