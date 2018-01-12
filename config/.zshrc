@@ -61,7 +61,11 @@ ZSH_THEME="sorin"
 plugins=(
   git
   vi-mode
+  jira
 )
+
+JIRA_URL='redacted'
+JIRA_NAME='redacted'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,3 +107,4 @@ alias brewup='brew update; brew upgrade; brew cask update; brew prune; brew clea
 alias ll='ls -la'
 
 eval $(thefuck --alias)
+eval "$(chef shell-init zsh)"
