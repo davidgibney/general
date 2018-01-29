@@ -1,0 +1,120 @@
+# Delete files based on certain date(s)
+ls -lah | grep "Mar 19" | awk {'print $9'} | xargs rm
+ls -lah | egrep "Jul 2[1-5]" | awk {'print $9'} | xargs rm -rf
+
+# Killing hard-hung Java procs
+ssh user@$host "pkill -9 -o -f java"
+
+# Run a command remotely with logging, sent to the background and with no hang up
+ssh user@$host "nohup /opt/mycommand > /tmp/mycommandlog 2>&1 &"
+
+# Change HDFS location in your MySQL Metastore DB for Hive
+mysqldump -p metastore > metastore-backup-`date +%Y%m%d`.sql
+mysql -p metastore 
+UPDATE SDS SET LOCATION=REPLACE(LOCATION, 'hdfs://hadoop-namenode-1',
+'hdfs://hadoop-namenode-2');
+UPDATE DBS SET `DESC`=REPLACE(`DESC`, 'hdfs://hadoop-namenode-1',
+'hdfs://hadoop-namenode-2');
+
+# Kill a program no matter its PID
+kill -9 $(cat /var/run/yum.pid)
+
+# If yum is borked
+killall -9 yum; yum clean all; yum-complete-transaction --cleanup-only
+
+# Test an SSL connection
+openssl s_client -connect 172.16.0.1:443
+
+# Find empty folders in HDFS
+hadoop jar /srv/cloudera/parcels/CDH-5.6.0-1.cdh5.6.0.p0.45/lib/solr/contrib/mr/search-mr-1.0.0-cdh5.6.0-job.jar org.apache.solr.hadoop.HdfsFindTool -find /user/hive/warehouse -empty > /tmp/ls_dump_hivewarehouse.txt
+
+#### OH RAID
+## MegaCli
+#install megacli
+rpm -ivh http://mirror.cogentco.com/pub/misc/MegaCli-8.07.14-1.noarch.rpm
+#check up on the drives
+/opt/MegaRAID/MegaCli/MegaCli64 -PDlist -aALL -NoLog | egrep 'Slot|state' | awk '/Slot/{if (x)print x;x="";}{x=(!x)?$0:x" -"$0;}END{print x;}' | sed 's/Firmware state://g'
+#get drive info
+$megacli -PDInfo -PhysDrv [20:4] -aAll
+#Creating a new VD
+megacli -CfgLdAdd -r0 [20:4] -a0
+
+## HP
+You can use udev to find the uuid of a drive:
+udevadm info -n /dev/sdc -a
+
+Can also correlate drives with this:
+blkid -o list -c /dev/null
+
+and of course lsw -c disk
+
+=> ctrl all show config
+=> ctrl slot=0 pd 2I:1:6 show detail
+
+Execute the following command to create a new logical drive using RAID 0 option.
+=> ctrl slot=0 create type=ld drives=1I:1:3 raid=0
+
+To display the detailed status of the logical drive, do the following:
+=> ctrl slot=0 ld 2 show
+
+hpacucli ctrl all show config | egrep -B3 -A3 -i "(fail|error|offline|rebuild|ignoring|degraded|skipping|nok)"
+
+# Change iLO login
+# cat /tmp/change_pass.xml
+<RIBCL VERSION="2.0">
+  <LOGIN USER_LOGIN="adminname" PASSWORD="password">
+  <USER_INFO MODE="write">
+    <MOD_USER USER_LOGIN="root">
+      <PASSWORD value=“NewPassword”/>
+    </MOD_USER>
+  </USER_INFO>
+  </LOGIN>
+</RIBCL>
+# hpconfg -f /tmp/change_pass.xml
+
+
+
+# Back up directories with tar
+cd /dir/to/backup; tar -cvf /srv/mybackup.tar .
+
+
+# Chef data bags
+It is useful to store keys and certificates in an encrypted chef data bag, for security. 
+To store SSL certs, you need to remove the newlines and encode them into the content... 
+cat /your/private/key | sed s/$/\\\\n/ | tr -d '\n' 
+and then you can copy/paste this into your JSON, from a 
+knife data bag create <bag> <item>
+In your editor you'll see one element already, just an "id" element. You should add a "value" element and paste in your nicely-formatted certificate contents. 
+ 
+You can see the examples of making a file from the data bag item,
+https://docs.chef.io/resource_file.html#examples
+ 
+* https://docs.chef.io/data_bags.html
+
+
+### Git, reverting changes
+
+# Revert a certain file, assuming the commit you want is abcde:
+git checkout abcde file/to/restore
+
+# Preview changes before running git clean to ensure you don’t have untracked items that could get removed
+git clean -nd
+
+(or do a git clean -i for interactive)
+# Revert changes to modified files.
+git reset --hard
+
+# Remove all untracked files and directories.
+git clean -fd
+# Revert the changes only in the current working directory
+git checkout -- .
+
+# Reset to a specific commit head (do a git log to find a commit that you want)
+git reset [<mode>] [<commit>]
+  This form resets the current branch head to <commit> and possibly updates the index (resetting it to the tree of <commit>) and the working tree depending on <mode>.
+
+Other notes:
+
+'git reset --hard' will undo both staged and unstaged changes, whereas 'git checkout -- .' will undo only unstaged changes
+
+
