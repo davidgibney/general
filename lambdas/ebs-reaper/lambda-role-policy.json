@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "BasicLambdaAndVPCAndEC2Permissions",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "lambda:InvokeFunction",
+                "ec2:DeleteVolume*",
+                "ec2:DescribeVolume*",
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DeleteNetworkInterface",
+                "cloudwatch:GetMetric*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
