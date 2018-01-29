@@ -1,0 +1,21 @@
+-- To find how much space is consumed by a query
+select * from SVL_QUERY_SUMMARY where query=<queryid> ;
+select * from svl_query_report where query=<queryid>;
+
+
+-- To show in which WLM queue a query ran
+select * from stl_wlm_query where query=<queryid> ;
+
+
+-- To show metrics and metadata about a table
+select database, schema, "table", encoded, diststyle, sortkey1, sortkey1_enc, sortkey_num, size, pct_used, empty, unsorted, stats_off, tbl_rows, skew_sortkey1, skew_rows from svv_table_info ;
+
+
+-- While a query is running, get information about its upload size and status
+-- https://docs.aws.amazon.com/redshift/latest/dg/r_STV_LOAD_STATE.html
+select * from STV_LOAD_STATE where query=<queryid> ;
+
+
+-- To show about any transient table created
+-- https://docs.aws.amazon.com/redshift/latest/dg/r_STV_TBL_TRANS.html
+select * from stv_tbl_trans ;
