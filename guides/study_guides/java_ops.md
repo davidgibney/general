@@ -1,5 +1,5 @@
 # java_ops
-Study guide for SRE of Java applications
+Study guide for typical operations work around Java applications.
 
 ## High level definitions
 
@@ -191,12 +191,16 @@ Options for these arguments can include, but are not limited to, the following e
 	* Java Authentication and Activation Service
 * JAR
 	* Java Archive
+* JCE
+	* Java Cryptography Extension. JCE provides a framework and implementation for encryption, key generation and key agreement, and Message Authentication Code (MAC) algorithms.
 * JDBC
 	* Java Database Connectivity
 * JIT
 	* Just in Time
 * JLS
 	* Java Language Specification
+* JNA
+	* Java Native Access. Gives access to native shared libraries without using the Java Native Interface.
 * JNDI
 	* Java Naming and Directory Service
 * JNI
