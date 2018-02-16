@@ -1,5 +1,20 @@
 # More Linux cheats!
 
+```bash
+You have a log file, and you want to parse the log and print out only the lines that have the word "hello" as the third word, and you must also print the line number. Example log lines:
+
+Service started in 20.1 seconds
+Server sent hello to client x.x.x.x
+Server sent hello to client y.y.y.y
+Server got hello from client x.x.x.x
+Server did not get hello in time from client y.y.y.y
+
+What is a command that could accomplish this?
+
+awk '$3 == "hello" { print NR, $0 }' logfile.txt
+
+```
+
 
 ```bash
 
